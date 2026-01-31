@@ -9,38 +9,35 @@ import { ArrowRight } from "lucide-react";
 export default function Home() {
   return (
     <main className="theme-bg min-h-screen transition-colors duration-300">
-      <Grid>
-        {/* ROW 1: Navigation */}
-        {/* Col 1: PHILOSOPHY */}
-        <GridCell className="flex items-center justify-start py-4">
+      {/* Navigation Bar - Full Width */}
+      <nav className="w-full flex items-center justify-between px-6 py-4 border-b grid-line-dashed">
+        {/* Left: Menu Items */}
+        <div className="flex items-center gap-12">
           <Link
             href="#philosophy"
             className="text-xs font-mono uppercase tracking-[0.2em] theme-text-muted hover:text-[#FF4500] transition-colors"
           >
             PHILOSOPHY
           </Link>
-        </GridCell>
-
-        {/* Col 2: WORKS */}
-        <GridCell className="flex items-center justify-center py-4">
           <Link
             href="#works"
             className="text-xs font-mono uppercase tracking-[0.2em] theme-text-muted hover:text-[#FF4500] transition-colors"
           >
             WORKS
           </Link>
-        </GridCell>
-
-        {/* Col 3: CONTACT + Theme Toggle */}
-        <GridCell className="flex items-center justify-between py-4">
           <Link
             href="/contact"
             className="text-xs font-mono uppercase tracking-[0.2em] theme-text-muted hover:text-[#FF4500] transition-colors"
           >
             CONTACT
           </Link>
-          <ThemeSwitch />
-        </GridCell>
+        </div>
+
+        {/* Right: Theme Toggle */}
+        <ThemeSwitch />
+      </nav>
+
+      <Grid>
 
         {/* ROW 2 */}
         {/* Col 1: SYS CONFIG + Brand Title */}

@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #1a0a0a;
+  color: #FFFFFF;
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Radial glow effect for accent areas */
+.glow-orange {
+  box-shadow: 0 0 60px 20px rgba(255, 69, 0, 0.15);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+}
+
+/* Grid dashed lines */
+.grid-line-dashed {
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.08);
+}

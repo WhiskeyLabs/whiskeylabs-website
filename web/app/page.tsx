@@ -4,9 +4,22 @@ import { Grid, GridCell } from "@/components/Layout/GridSystem";
 import ThreeRing from "@/components/Hero/ThreeRing";
 import { ThemeSwitch } from "@/components/ThemeSwitch";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : true;
+  const logoSrc = isDark ? "/brand/logo-dark-burgundy.png" : "/brand/logo-light-orange.png";
+
   return (
     <main className="theme-bg min-h-screen transition-colors duration-300">
       {/* Navigation Bar - Full Width */}
@@ -49,13 +62,25 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Brand Name */}
+          {/* Brand Name with Dog Logo */}
           <div className="mt-auto pb-8">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-none">
               <span className="theme-text-primary">Whiskey</span>
-              <br />
-              <span className="theme-text-subtle">Labs</span>
             </h1>
+            {/* Labs + Dog Logo Row */}
+            <div className="flex items-end gap-4">
+              <span className="text-6xl md:text-7xl lg:text-8xl font-bold theme-text-subtle leading-none">
+                Labs
+              </span>
+              {/* Dog Logo - using manual PNG versions with match backgrounds */}
+              <Image
+                src={logoSrc}
+                alt="Whiskey Labs Dog Logo"
+                width={80}
+                height={80}
+                className="w-[60px] h-[60px] md:w-[70px] md:h-[70px] lg:w-[80px] lg:h-[80px] object-contain mb-1"
+              />
+            </div>
             {/* Pagination indicator */}
             <div className="flex items-center gap-2 mt-6">
               <div className="w-8 h-0.5 bg-[#FF4500]"></div>

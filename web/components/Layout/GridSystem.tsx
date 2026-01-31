@@ -13,7 +13,7 @@ export function Grid({ children, className }: GridProps) {
         <div
             className={clsx(
                 "grid grid-cols-1 md:grid-cols-3 w-full min-h-screen",
-                "border-l border-t border-dashed border-white/5",
+                "border-l border-t border-dashed grid-line-dashed",
                 className
             )}
         >
@@ -33,7 +33,7 @@ export function GridCell({ children, className, colSpan = 1, rowSpan = 1 }: Grid
     return (
         <div
             className={clsx(
-                "border-b border-r border-dashed border-white/5 p-6 md:p-8 lg:p-12 relative",
+                "border-b border-r border-dashed grid-line-dashed p-6 md:p-8 lg:p-12 relative",
                 // Column Spans
                 colSpan === 2 && "md:col-span-2",
                 colSpan === 3 && "md:col-span-3",

@@ -10,10 +10,60 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Dark mode (default) */
 body {
   background: #1a0a0a;
   color: #FFFFFF;
   font-family: var(--font-sans), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode - target html.light */
+html.light body {
+  background: #faf8f5 !important;
+  color: #1a0a0a !important;
+}
+
+/* Theme-aware text colors - Dark mode default */
+.theme-text-primary {
+  color: #FFFFFF;
+}
+
+html.light .theme-text-primary {
+  color: #1a0a0a;
+}
+
+.theme-text-muted {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+html.light .theme-text-muted {
+  color: rgba(26, 10, 10, 0.6);
+}
+
+.theme-text-subtle {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+html.light .theme-text-subtle {
+  color: rgba(26, 10, 10, 0.35);
+}
+
+.theme-bg {
+  background: #1a0a0a;
+}
+
+html.light .theme-bg {
+  background: #faf8f5 !important;
+}
+
+/* Grid borders */
+.theme-border {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+html.light .theme-border {
+  border-color: rgba(26, 10, 10, 0.1);
 }
 
 /* Radial glow effect for accent areas */
@@ -25,8 +75,17 @@ body {
   text-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
 }
 
-/* Grid dashed lines */
+/* Grid dashed lines - Dark mode */
 .grid-line-dashed {
   border-style: dashed;
   border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.light .grid-line-dashed {
+  border-color: rgba(26, 10, 10, 0.12) !important;
+}
+
+/* Pagination dots */
+html.light .bg-white\/20 {
+  background: rgba(26, 10, 10, 0.2) !important;
 }

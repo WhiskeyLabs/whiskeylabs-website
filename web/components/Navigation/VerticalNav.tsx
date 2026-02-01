@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { ThemeSwitch } from "@/components/ThemeSwitch";
 
 export function VerticalNav() {
     const pathname = usePathname();
@@ -58,7 +59,11 @@ export function VerticalNav() {
             </div>
 
             {/* Right Sidebar: Navigation */}
-            <div className="fixed right-0 top-0 h-screen w-[5%] min-w-[60px] border-l border-white/10 flex flex-col items-center justify-center z-50 theme-bg">
+            <div className="fixed right-0 top-0 h-screen w-[5%] min-w-[60px] border-l border-white/10 flex flex-col items-center justify-between py-12 z-50 theme-bg">
+                <div className="flex flex-col items-center">
+                    <ThemeSwitch />
+                </div>
+
                 <div className="flex flex-col items-center gap-16">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;

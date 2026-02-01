@@ -10,9 +10,9 @@ function HoneycombCore() {
 
     useFrame((state) => {
         if (meshRef.current) {
-            meshRef.current.rotation.y += 0.005;
-            meshRef.current.rotation.z += 0.002;
-            const s = 1 + Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+            meshRef.current.rotation.y += 0.002; // Slower rotation
+            meshRef.current.rotation.z += 0.001;
+            const s = 1 + Math.sin(state.clock.elapsedTime * 0.3) * 0.03; // Slower pulse
             meshRef.current.scale.set(s, s, s);
         }
     });
@@ -33,8 +33,8 @@ function HoneycombCore() {
             <Sphere args={[0.8, 32, 32]}>
                 <MeshDistortMaterial
                     color="#FF4500"
-                    speed={3}
-                    distort={0.4}
+                    speed={1.5} // Slower distortion
+                    distort={0.3}
                     radius={1}
                     emissive="#FF4500"
                     emissiveIntensity={0.5}
@@ -69,9 +69,9 @@ function FiberStrand({ index, total }: { index: number, total: number }) {
 
     useFrame((state) => {
         if (lineRef.current) {
-            lineRef.current.rotation.y += 0.01;
-            const pulse = (Math.sin(state.clock.elapsedTime * 2 + index) + 1) / 2;
-            lineRef.current.scale.setScalar(0.8 + pulse * 0.4);
+            lineRef.current.rotation.y += 0.003; // Slower strand rotation
+            const pulse = (Math.sin(state.clock.elapsedTime * 1 + index) + 1) / 2; // Slower pulse
+            lineRef.current.scale.setScalar(0.9 + pulse * 0.2);
         }
     });
 
@@ -95,12 +95,12 @@ function MovingPulse({ curve, delay }: { curve: THREE.CatmullRomCurve3, delay: n
 
     useFrame((state) => {
         if (pulseRef.current) {
-            const t = ((state.clock.elapsedTime + delay) % 4) / 4; // 4 second loop
+            const t = ((state.clock.elapsedTime + delay) % 8) / 8; // Slower loop (8s instead of 4s)
             const pos = curve.getPoint(t);
             pulseRef.current.position.copy(pos);
 
-            // Brightness pulse
-            const b = Math.sin(state.clock.elapsedTime * 10) * 0.5 + 1.5;
+            // Slower brightness pulse
+            const b = Math.sin(state.clock.elapsedTime * 4) * 0.5 + 1.5;
             (pulseRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity = b;
         }
     });
@@ -126,7 +126,7 @@ export default function PollinationPulse() {
                     <FiberStrand key={i} index={i} total={8} />
                 ))}
 
-                <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
+                <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.2} />
             </Canvas>
         </div>
     );

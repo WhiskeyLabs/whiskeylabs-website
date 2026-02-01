@@ -23,6 +23,19 @@ jobs:
                       echo "=== GIT HISTORY ON SERVER ==="
                       cd /var/www/whiskeylabs-website && git log -n 5
                       echo ""
+                      echo "=== SYSTEM PATHS ==="
+                      echo $PATH
+                      echo ""
+                      echo "=== SEARCHING FOR PM2 ==="
+                      which pm2 || find / -name pm2 -type f 2>/dev/null | grep bin | head -n 5 || echo "pm2 not found"
+                      echo ""
+                      echo "=== NVM CHECK ==="
+                      export NVM_DIR="$HOME/.nvm"
+                      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                      which node
+                      which npm
+                      which pm2 || echo "pm2 still not found after NVM"
+                      echo ""
                       echo "=== PM2 STATUS ==="
                       pm2 list
                       echo ""

@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import PollinationPulse from "@/components/Contact/PollinationPulse";
 
 export default function ContactPage() {
     const { resolvedTheme } = useTheme();
@@ -24,15 +25,11 @@ export default function ContactPage() {
             <div className="flex flex-col md:flex-row w-full flex-grow">
                 {/* Left Pane - Branding & Sculpture */}
                 <div className="md:w-1/2 p-12 pt-24 md:pt-12 flex flex-col justify-between border-r border-dashed border-white/5 relative">
-                    {/* Placeholder for 3D Sculpture: The Pollination Pulse */}
+                    {/* 3D Sculpture: The Pollination Pulse */}
                     <div className="flex-grow flex items-center justify-center relative overflow-hidden h-[400px] md:h-auto">
                         <div className="absolute inset-0 flex items-center justify-center">
-                            {/* Sculpture component will go here */}
-                            <div className="w-64 h-64 rounded-full bg-[#FF4500]/5 blur-3xl animate-pulse" />
+                            <PollinationPulse />
                         </div>
-                        <h2 className="text-xl font-mono uppercase tracking-[0.3em] theme-text-subtle text-center z-10">
-                            The Pollination Pulse
-                        </h2>
                     </div>
 
                     {/* Bottom Left Branding (Matches Homepage Style) */}

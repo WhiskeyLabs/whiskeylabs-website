@@ -1,9 +1,13 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_123'); // Fallback for build time safety
 
 export async function POST(request: Request) {
+    if (!process.env.RESEND_API_KEY) {
+        return NextResponse.json({ error: 'Server misconfiguration: Missing API Key' }, { status: 500 });
+    }
+
     try {
         const { name, email, message } = await request.json();
 

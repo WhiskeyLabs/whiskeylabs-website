@@ -27,7 +27,7 @@ export default function Home() {
         {/* Left: Menu Items */}
         <div className="flex items-center gap-12">
           <Link
-            href="#philosophy"
+            href="/philosophy"
             className="text-xs font-mono uppercase tracking-[0.2em] theme-text-muted hover:text-[#FF4500] transition-colors"
           >
             PHILOSOPHY

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-01-31
+
+### Added
+- Integrated Whiskey dog outline logo into the brand section
+- Added theme-aware manual logo assets (Burgundy for Dark Mode, Orange for Light Mode)
+- Updated site title to "Whiskey Labs"
+- Improved navigation bar alignment and spacing
+
 ## [0.1.0] - 2026-01-31
 
 ### Added

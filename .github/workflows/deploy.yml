@@ -14,13 +14,15 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          script_stop: true
           script: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd /var/www/whiskeylabs-website
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
             cd web
             npm install
             npm run build
-            pm2 restart whiskeylabs
-            echo "✅ Deployed at $(date)"
+            pm2 restart whiskeylabs || pm2 start npm --name "whiskeylabs" -- start
+            echo "✅ Deployment Sync Complete at $(date)"

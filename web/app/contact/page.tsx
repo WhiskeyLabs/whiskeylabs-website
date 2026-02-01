@@ -2,48 +2,70 @@
 
 import { ThemeSwitch } from "@/components/ThemeSwitch";
 import Link from "next/link";
-import { X, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function ContactPage() {
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const isDark = mounted ? resolvedTheme === "dark" : true;
+    const logoSrc = isDark ? "/brand/logo-dark-burgundy.png" : "/brand/logo-light-orange.png";
+
     return (
-        <main className="min-h-screen bg-[#1a0a0a] relative">
-            {/* Header/Nav Overlay */}
-            <div className="absolute top-0 left-0 w-full p-6 md:p-12 flex justify-between items-start z-10">
-                <Link href="/">
-                    <h1 className="text-xl font-bold tracking-tighter text-white">
-                        <span>Whiskey</span>
-                        <span className="text-white/40">Labs</span>
-                    </h1>
-                </Link>
-
-                <div className="flex items-center gap-6">
-                    <ThemeSwitch />
-                    <Link
-                        href="/"
-                        className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                    >
-                        <X className="w-5 h-5 text-white/70" />
-                    </Link>
-                </div>
-            </div>
-
+        <main className="min-h-screen theme-bg relative flex flex-col md:flex-row transition-colors duration-300">
             {/* Split Pane Layout */}
-            <div className="flex flex-col md:flex-row w-full min-h-screen">
-                {/* Left Pane - Minimalist */}
-                <div className="md:w-1/2 p-12 pt-24 md:pt-12 flex items-center justify-center border-r border-dashed border-white/5">
-                    <h2 className="text-5xl md:text-7xl font-bold text-white/10">
-                        Get in
-                        <br />
-                        Touch
-                    </h2>
+            <div className="flex flex-col md:flex-row w-full flex-grow">
+                {/* Left Pane - Branding & Sculpture */}
+                <div className="md:w-1/2 p-12 pt-24 md:pt-12 flex flex-col justify-between border-r border-dashed border-white/5 relative">
+                    {/* Placeholder for 3D Sculpture: The Pollination Pulse */}
+                    <div className="flex-grow flex items-center justify-center relative overflow-hidden h-[400px] md:h-auto">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            {/* Sculpture component will go here */}
+                            <div className="w-64 h-64 rounded-full bg-[#FF4500]/5 blur-3xl animate-pulse" />
+                        </div>
+                        <h2 className="text-xl font-mono uppercase tracking-[0.3em] theme-text-subtle text-center z-10">
+                            The Pollination Pulse
+                        </h2>
+                    </div>
+
+                    {/* Bottom Left Branding (Matches Homepage Style) */}
+                    <div className="mt-auto">
+                        <h1 className="text-4xl md:text-5xl font-bold leading-none">
+                            <span className="theme-text-primary">Whiskey</span>
+                        </h1>
+                        <div className="flex items-end gap-3">
+                            <span className="text-4xl md:text-5xl font-bold theme-text-subtle leading-none">
+                                Labs
+                            </span>
+                            <Image
+                                src={logoSrc}
+                                alt="Whiskey Labs Logo"
+                                width={50}
+                                height={50}
+                                className="w-10 h-10 md:w-12 md:h-12 object-contain mb-1"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Right Pane - Form */}
-                <div className="md:w-1/2 p-12 flex items-center">
+                <div className="md:w-1/2 p-12 pt-16 flex items-center bg-black/5">
                     <form className="w-full max-w-md space-y-12">
+                        <div className="space-y-4">
+                            <h3 className="text-2xl font-bold theme-text-primary tracking-tight">Let's build engines.</h3>
+                            <p className="text-sm theme-text-subtle font-mono uppercase tracking-widest">Initialization sequence started...</p>
+                        </div>
+
                         <div className="space-y-2">
                             <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#FF4500]">
-                                Name
+                                Identity
                             </label>
                             <input
                                 type="text"
@@ -54,7 +76,7 @@ export default function ContactPage() {
 
                         <div className="space-y-2">
                             <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#FF4500]">
-                                Email
+                                Transmission Channel
                             </label>
                             <input
                                 type="email"
@@ -65,23 +87,25 @@ export default function ContactPage() {
 
                         <div className="space-y-2">
                             <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#FF4500]">
-                                Message
+                                Payload
                             </label>
                             <textarea
                                 placeholder="YOUR MESSAGE"
                                 rows={1}
-                                className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:outline-none focus:border-[#FF4500] transition-colors uppercase placeholder:text-white/20 font-mono resize-none"
+                                className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:outline-none focus:border-[#FF4500] transition-colors uppercase placeholder:text-white/20 font-mono resize-none overflow-hidden"
                             />
                         </div>
 
                         {/* Submit Button */}
-                        <button
-                            type="submit"
-                            className="fixed bottom-8 right-8 md:bottom-12 md:right-12 bg-[#FF4500] hover:bg-[#FF5722] text-white rounded-full p-5 shadow-lg shadow-[#FF4500]/30 transition-all hover:scale-105 flex items-center justify-center"
-                            aria-label="Submit"
-                        >
-                            <ArrowRight className="w-6 h-6" />
-                        </button>
+                        <div className="flex justify-end pt-8">
+                            <button
+                                type="submit"
+                                className="group bg-[#FF4500] hover:bg-[#FF5722] text-white rounded-full px-8 py-4 shadow-lg shadow-[#FF4500]/30 transition-all hover:scale-105 flex items-center gap-3 font-mono text-sm tracking-widest"
+                            >
+                                TRANSMIT
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

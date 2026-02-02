@@ -1,6 +1,7 @@
 "use client";
 
 import { ThemeSwitch } from "@/components/ThemeSwitch";
+import emailjs from '@emailjs/browser';
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -27,20 +28,21 @@ export default function ContactPage() {
         setStatus("transmitting");
 
         try {
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                setStatus("success");
-                setFormData({ name: "", email: "", message: "" });
-            } else {
-                setStatus("error");
-            }
+            await emailjs.send(
+                'support_whiskeybmm',
+                'template_n081kru',
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message,
+                    reply_to: formData.email,
+                },
+                'NYqeGi2iMmJrGuZ49'
+            );
+            setStatus("success");
+            setFormData({ name: "", email: "", message: "" });
         } catch (error) {
-            console.error(error);
+            console.error('EmailJS Error:', error);
             setStatus("error");
         }
     };
